@@ -13,9 +13,12 @@ class TableInfo
     public function main()
     {
         $html = new \Module\Html\HtmlTable;
-        
+
+        $uri = $_SERVER['REQUEST_URI'];
+        $uris = explode("/",$uri); // 파란책
+
         // echo "메인 호출이에요.";
-        $query = "DESC members";
+        $query = "DESC ".$uris[2];
         $result = $this->db->queryExecute($query);
 
         $count = mysqli_num_rows($result);
