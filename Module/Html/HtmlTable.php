@@ -19,7 +19,7 @@ class HtmlTable
         for($i=0;$i<count($rows);$i++) {
             $body .= "<tr>";
             $body .= "<td>$i</td>";
-            $body .= "<td>".$rows[$i]->Tables_in_php."</td>";
+            $body .= "<td><a href='/TableInfo/".$rows[$i]->Tables_in_php."'>".$rows[$i]->Tables_in_php."</a></td>";
             $body .= "</tr>";
         }    
 
