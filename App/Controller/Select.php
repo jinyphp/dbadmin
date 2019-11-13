@@ -29,6 +29,8 @@ class Select
         if ($third == "new") {
             // echo "새로운 데이터 입력";
             $this->newInsert($tableName);
+        } else if($third == "delete") {
+            $this->delete($tableName);
         } else 
         // 3번째 값이 정수이면: 수정
         // 문자 -> 숫자 (intval)
@@ -42,6 +44,25 @@ class Select
         } else {
             $this->list($tableName);
         }        
+    }
+
+    private function delete($tableName)
+    {
+        $fourth = $this->HttpUri->fourth();
+        echo $fourth." 삭제합니다.";
+
+        // 삭제쿼리
+        $query = "DELETE FROM ".$tableName." ";
+
+        // 조건
+        $query .= "WHERE id='".$fourth."'";
+        echo $query; // 쿼리 확인 습관.
+
+        $result = $this->db->queryExecute($query);
+
+        // 페이지 이동
+        header("location:"."/select/".$tableName);
+
     }
 
     private function edit($tableName, $id)
@@ -105,6 +126,7 @@ class Select
         }
         
         $content .= "<input type=\"submit\" value=\"수정\">";
+        $content .= "<a href='./delete/".$id."'>삭제</a>";
         $content .= "</form>";
         
 
@@ -177,7 +199,22 @@ class Select
     public function list($tableName)
     {        
         if ( $tableName ) {
+          // 전체갯수
+            $query = "SELECT (`id`) from ".$tableName; // SQL 쿼리문
+            echo $query;
+
+            $result = $this->db->queryExecute($query);
+            $total = mysqli_num_rows($result);
+
+            echo "천체갯수=".$total;
+
+            $lines = 5;
+            $start = $_GET['start']? $_GET['start']:0; //5;
+            $start = $start * $lines;
+
             $query = "SELECT * from ".$tableName; // SQL 쿼리문
+            $query .= " LIMIT ".$start.",".$lines;
+            echo $query;
             $result = $this->db->queryExecute($query);
 
             $content = ""; // 초기화
@@ -215,6 +252,21 @@ class Select
         } else {
             $content = "선택된 테이블이 없습니다.";
         }
+
+        $totalPages = $total / $lines; // 페이지수
+
+        $content .= "<nav aria-label=\"Page navigation example\">
+        <ul class=\"pagination\">
+          <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>";
+
+        for ($i=0,$j=1; $i<$totalPages; $i++, $j++) {
+            // GET 방식으로 URI를 이용하여 값을 전달함.
+            $content .= "<li class=\"page-item\"><a class=\"page-link\" href=\"?start=$i\">$j</a></li>";
+        }
+
+        $content .= "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>
+        </ul>
+      </nav>";
 
         $body = file_get_contents("../Resource/select.html");
         $body = str_replace("{{content}}",$content, $body); // 데이터 치환
