@@ -28,7 +28,8 @@ class Databases
             // 키, 값 연상배열
             $rows []= [
                 'num'=>$i,
-                'name'=>"<a href='/Tables/".$row->Database."'>".$row->Database."</a>"
+                'name'=>"<a href='/Tables/".$row->Database."'>".$row->Database."</a>",
+                'data'=>"<a href='/select/".$row->Database."'>".$row->Database."</a>"
             ];
         }
         $content = $html->table($rows);

@@ -28,7 +28,8 @@ class Tables
             // 키, 값 연상배열
             $rows []= [
                 'num'=>$i,
-                'name'=>"<a href='/TableInfo/".$row->Tables_in_php."'>".$row->Tables_in_php."</a>"
+                'name'=>"<a href='/TableInfo/".$row->Tables_in_php."'>".$row->Tables_in_php."</a>",
+                'data'=>"<a href='/select/".$row->Tables_in_php."'>데이터조회</a>"
             ];
         }
         $content = $html->table($rows);
