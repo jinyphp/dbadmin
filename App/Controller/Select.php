@@ -44,7 +44,7 @@ class Select
         }        
     }
 
-    public function edit($tableName, $id)
+    private function edit($tableName, $id)
     {
         print_r($_POST);
         if ($_POST) {
@@ -57,15 +57,14 @@ class Select
                 $query .= "`$key`= '".$value."',";
             }
             
-
             $query = rtrim($query, ","); // 마지막 콤마 제거
-            echo $query;
+            // echo $query;
 
             // 조건값
             $query .= " WHERE id='".$id."'";
 
             // echo $query;
-            exit;
+            // exit;
 
             $result = $this->db->queryExecute($query);
 
@@ -190,7 +189,22 @@ class Select
                 for ($i=0;$i<$count;$i++) {
                     $row = mysqli_fetch_object($result);
                     // print_r($row);
-                    $rows []= $row; // 배열 추가 (2차원 배열)
+                    
+                    $arr = []; // 배열 초기화, 
+                    // 왜? 기존의 배열, 새로운 배열 계속 추가 되기 때문
+                    foreach ($row as $key=> $value) {
+                       // 초기화된 배열에, $key 값을 가지는 프로퍼티에
+                       // $value 값을 저장
+                       
+                       if($key=="id") {
+                           $value = "<a href='./".$tableName."/".$value."'>".$value."</a>";
+                       }
+                        $arr[$key] = $value; // 연상배열
+                    }
+
+                    // $rows []= $row; // 배열 추가 (2차원 배열)
+                    // $row 직접 넣지 않고, 가공해서 임시 배열인 $arr 사용
+                    $rows []= $arr;
                 }
         
                 $content = $this->Html->table($rows);
