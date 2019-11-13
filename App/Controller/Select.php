@@ -23,22 +23,97 @@ class Select
     {        
         $tableName = $this->HttpUri->second();
         
-
-        if ($this->HttpUri->third() == "new") {
+        // 3번재 값 저장
+        $third = $this->HttpUri->third();
+        
+        if ($third == "new") {
             // echo "새로운 데이터 입력";
             $this->newInsert($tableName);
         } else 
         // 3번째 값이 정수이면: 수정
         // 문자 -> 숫자 (intval)
         // 숫자 -> 정수??? (is_int)
-        if ( is_numeric($this->HttpUri->third()) ) {
+        if ( is_numeric($third) ) {
             // 데이터 수정
-            echo "데이터 수정";
+            // echo "데이터 수정";
+            // echo $third;
+            $this->edit($tableName, $third);
+
         } else {
             $this->list($tableName);
         }        
     }
 
+    public function edit($tableName, $id)
+    {
+        print_r($_POST);
+        if ($_POST) {
+            $query = "UPDATE ".$tableName." SET ";
+            // 갱신 데이터
+            // $query .= "`FirstName`= '".$_POST['FirstName']."', ";
+            // $query .= "`LastName`= '".$_POST['LastName']."' ";
+            foreach ($_POST as $key => $value) {
+                if($key == "id") continue;
+                $query .= "`$key`= '".$value."',";
+            }
+            
+
+            $query = rtrim($query, ","); // 마지막 콤마 제거
+            echo $query;
+
+            // 조건값
+            $query .= " WHERE id='".$id."'";
+
+            // echo $query;
+            exit;
+
+            $result = $this->db->queryExecute($query);
+
+            // 페이지 이동
+            header("location:"."/select/".$tableName);
+
+        }
+
+        // step1. 데이터 조회
+        $query = "SELECT * from ".$tableName." WHERE id = ".$id;
+        echo $query;
+        $result = $this->db->queryExecute($query);
+        $data = mysqli_fetch_object($result);
+        print_r($data);
+
+
+        $content = "<form method=\"post\">";
+        $content .= "<input type=\"hidden\" name=\"id\" value='$id'>";
+        // $content .= "<input type=\"text\" name=\"lastname\">";
+        $query = "DESC ".$tableName;
+        $result = $this->db->queryExecute($query);
+        $count = mysqli_num_rows($result);
+        for ($i=0;$i<$count;$i++) {
+            $row = mysqli_fetch_object($result);
+            // $rows []= $row; // 배열 추가 (2차원 배열)
+            // $row = 객체
+            // print_r($row);
+            if($row->Field == "id") continue;
+            
+            // 필드명 키
+            $key = $row->Field;
+            
+            $content .= $row->Field." <input type=\"text\" 
+            name=\"".$row->Field."\" 
+            value='".$data->$key."'>";
+
+            $content .= "<br>";
+        }
+        
+        $content .= "<input type=\"submit\" value=\"수정\">";
+        $content .= "</form>";
+        
+
+
+        $body = file_get_contents("../Resource/edit.html");
+        $body = str_replace("{{content}}",$content, $body); // 데이터 치환
+        echo $body;
+    }
 
 
     /**
