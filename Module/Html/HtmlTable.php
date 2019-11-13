@@ -1,5 +1,6 @@
 <?php
 namespace Module\Html;
+
 class HtmlTable
 {
     function table($rows)
@@ -17,6 +18,7 @@ class HtmlTable
             $body .= "<th>".$key."</th>";
         }
         $body .= "</tr>";
+
         $body .= "</thead>";
         $body .= "<tbody>";
         
@@ -35,6 +37,7 @@ class HtmlTable
             
             $body .= "</tr>";
         }    
+
         $body .= "</tbody>";
         $body .= "</table>";
         return $body;
