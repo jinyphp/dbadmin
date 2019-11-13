@@ -22,13 +22,24 @@ class Select
     public function main()
     {        
         $tableName = $this->HttpUri->second();
+        
+
         if ($this->HttpUri->third() == "new") {
-            echo "새로운 데이터 입력";
+            // echo "새로운 데이터 입력";
             $this->newInsert($tableName);
+        } else 
+        // 3번째 값이 정수이면: 수정
+        // 문자 -> 숫자 (intval)
+        // 숫자 -> 정수??? (is_int)
+        if ( is_numeric($this->HttpUri->third()) ) {
+            // 데이터 수정
+            echo "데이터 수정";
         } else {
             $this->list($tableName);
         }        
     }
+
+
 
     /**
      * 새로운 데이터를 입력
@@ -73,7 +84,7 @@ class Select
             $row = mysqli_fetch_object($result);
             // $rows []= $row; // 배열 추가 (2차원 배열)
             // $row = 객체
-            print_r($row);
+            // print_r($row);
             if($row->Field == "id") continue;
             $content .= $row->Field." <input type=\"text\" name=\"".$row->Field."\">";
             $content .= "<br>";

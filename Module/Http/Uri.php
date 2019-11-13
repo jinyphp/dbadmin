@@ -10,7 +10,7 @@ class Uri
 
     public function __construct()
     {
-        echo __CLASS__;
+        // echo __CLASS__;
         $this->uri= $_SERVER['REQUEST_URI'];
         $this->uris = explode("/",$this->uri); // 파란책
         unset($this->uris[0]); // 0번 배열은 제거
