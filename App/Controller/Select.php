@@ -143,7 +143,7 @@ class Select
     public function newInsert($tableName)
     {
 
-        print_r($_POST);
+        // print_r($_POST);
         if ($_POST) {
             
             $fields = " (";
@@ -182,11 +182,20 @@ class Select
             // $row = 객체
             // print_r($row);
             if($row->Field == "id") continue;
-            $content .= $row->Field." <input type=\"text\" name=\"".$row->Field."\">";
-            $content .= "<br>";
+
+            // 항목추가
+            $content .= "
+        <div class=\"form-group\">
+            <label for=\"exampleInputEmail1\">".$row->Field."</label>
+            <input type=\"text\" name=\"".$row->Field."\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" >
+        </div>";
+
+            // $content .= $row->Field." <input type=\"text\" >";
+            // $content .= "<br>";
+
         }
         
-        $content .= "<input type=\"submit\" value=\"삽입\">";
+        $content .= "<input type=\"submit\" value=\"삽입\" class=\"btn btn-primary\">";
         $content .= "</form>";
 
         $body = file_get_contents("../Resource/insert.html");
