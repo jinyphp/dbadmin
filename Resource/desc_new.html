@@ -57,7 +57,18 @@
                 <form name="table" action="{{action}}" method="post">
                   <div class="form-group">
                       <label for="feildname">컬럼명</label>
-                      <input type="text" name="fieldname" class="form-control" id="tablename" placeholder="컬럼명을 입력해 주세요">
+                      <input type="text" name="fieldname" class="form-control" id="fieldname" placeholder="컬럼명을 입력해 주세요">
+                  </div>
+
+                  <div class="form-group">
+                      <label for="fieldtype">데이터 타입</label>
+                      <select name="fieldtype" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                          <option value="varchar(255)"selected>가변문자열</option>
+                          <option value="int(11)">정수값</option>
+                          <option value="text">텍스트값</option>
+                          <option value="datetime">날짜시간</option>
+                      </select>
+                      
                   </div>
 
                   <button type="button" class="btn btn-outline-primary" id="create">추가</button>

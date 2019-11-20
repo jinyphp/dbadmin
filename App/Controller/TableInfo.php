@@ -16,7 +16,13 @@ class TableInfo
         if($uri->third() == "new") {
             print_r($_POST);
             if ($_POST) {
-                $query = "ALTER TABLE ".$uri->second()." add ".$_POST['fieldname']." varchar(255)";
+                if ($_POST['fieldtype']) {
+                    $fieldtype = $_POST['fieldtype'];
+                } else {
+                    $fieldtype = "varchar(255)";
+                }
+
+                $query = "ALTER TABLE ".$uri->second()." add ".$_POST['fieldname']." ".$fieldtype;
                 $result = $this->db->queryExecute($query);
 
                 // 페이지 이동
