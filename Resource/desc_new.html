@@ -53,10 +53,15 @@
                 </div>
             </div>
             <div class="col-sm-10">
-                <h1>테이블 정보</h1>
-                {{content}}
+                <h1>컬럼추가</h1>
+                <form name="table" action="{{action}}" method="post">
+                  <div class="form-group">
+                      <label for="feildname">컬럼명</label>
+                      <input type="text" name="fieldname" class="form-control" id="tablename" placeholder="컬럼명을 입력해 주세요">
+                  </div>
 
-                <button type="button" class="btn btn-outline-primary" id="addField">컬럼 추가</button>
+                  <button type="button" class="btn btn-outline-primary" id="create">추가</button>
+                </form>
             </div>        
         </div>
               
@@ -68,12 +73,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script>
-    const addBtn = document.getElementById("addField");
-    addBtn.addEventListener("click",function(){
+    const createBtn = document.getElementById("create");
+    createBtn.addEventListener("click",function(){
         alert("새로운 컬럼을 추가합니다.");
-        document.location.href = "/TableInfo/{{tablename}}/new";
+        // document.location.href = "/tables/new";
+        document.forms.table.submit();
     });
-
 </script>
 
 </body>

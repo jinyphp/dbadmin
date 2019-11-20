@@ -12,6 +12,30 @@ class TableInfo
 
     public function main()
     {
+        $uri = new \Module\Http\Uri;
+        if($uri->third() == "new") {
+            print_r($_POST);
+            if ($_POST) {
+                $query = "ALTER TABLE ".$uri->second()." add ".$_POST['fieldname']." varchar(255)";
+                $result = $this->db->queryExecute($query);
+
+                // 페이지 이동
+                header("location:"."/TableInfo/".$uri->second());
+            }
+
+            // 새로운 컬럼
+            $body = file_get_contents("../Resource/desc_new.html");
+            $body = str_replace("{{action}}","/TableInfo/".$uri->second()."/new",$body);
+            echo $body;
+        } else {
+            // 목록출력
+            $this->list();
+        }
+        
+    }
+
+    private function list()
+    {
         $html = new \Module\Html\HtmlTable;
 
         $uri = $_SERVER['REQUEST_URI'];
@@ -32,6 +56,8 @@ class TableInfo
 
         $body = file_get_contents("../Resource/desc.html");
         $body = str_replace("{{content}}",$content, $body); // 데이터 치환
+
+        $body = str_replace("{{tablename}}",$uris[2], $body);
         echo $body;
     }
 
