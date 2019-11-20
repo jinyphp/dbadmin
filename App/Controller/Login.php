@@ -24,7 +24,7 @@ class Login
 
         if($_SESSION["email"]) {
             echo "로그인 상태입니다.";
-            
+
         } else {
             // 로그인 체크 및 저장
             if ($_POST) {
@@ -33,8 +33,14 @@ class Login
                     // 세션 슈퍼변수. 값 저장
                     $_SESSION["email"] = $_POST['email'];
                     echo "세션 저장 성공";
+
+                    // 페이지 이동
+                    header("location:"."/databases");
                 } else {
                     echo "로그인 실패";
+
+                    // 페이지 이동
+                    header("location:"."/");
                 }
             }
         }

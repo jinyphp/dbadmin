@@ -53,10 +53,17 @@
                 </div>
             </div>
             <div class="col-sm-10">
-                <h1>테이블 목록</h1>
-                {{content}}
+                <h1>테이블 생성</h1>
+                <form name="table" action="/tables/new" method="post">
+                  <div class="form-group">
+                      <label for="tablename">테이블명</label>
+                      <input type="text" name="tablename" class="form-control" id="tablename" placeholder="테이블명을 입력해 주세요">
+                  </div>
 
-                <button type="button" class="btn btn-outline-primary" id="addNew">테이블 추가</button>
+                  <button type="button" class="btn btn-outline-primary" id="create">생성</button>
+                </form>
+
+                
             </div>        
         </div>
               
@@ -68,10 +75,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script>
-    const addBtn = document.getElementById("addNew");
-    addBtn.addEventListener("click",function(){
+    const createBtn = document.getElementById("create");
+    createBtn.addEventListener("click",function(){
         alert("새로운 테이블을 생성합니다.");
-        document.location.href = "/tables/new";
+        // document.location.href = "/tables/new";
+        document.forms.table.submit();
     });
 </script>
 
