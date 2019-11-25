@@ -1,0 +1,63 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "381588dc4c32e6d764be64520e942f37",
+    "packages": [
+        {
+            "name": "jiny/database",
+            "version": "0.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jinyphp/database.git",
+                "reference": "9476cfd8adf46060d025a6fc8fb1d898cc4d2d09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jinyphp/database/zipball/9476cfd8adf46060d025a6fc8fb1d898cc4d2d09",
+                "reference": "9476cfd8adf46060d025a6fc8fb1d898cc4d2d09",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jiny\\Database\\": "src/"
+                },
+                "files": [
+                    "src/Helpers/Helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hojinlee",
+                    "email": "infohojin@gmail.com",
+                    "homepage": "http://www.jinyphp.com"
+                }
+            ],
+            "description": "jinyPHP database",
+            "homepage": "http://www.jinyphp.com",
+            "keywords": [
+                "framwork",
+                "jinyphp"
+            ],
+            "time": "2019-09-27T07:48:35+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
