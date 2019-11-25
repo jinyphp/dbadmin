@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DB Web Tools</title>
+    <title>PHP 테이블</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
@@ -41,26 +41,47 @@
         </div>
       </nav>
 
-      <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-2">
-                    <h1 class="my-4">DBAdmin</h1>
-                    <div class="list-group">
-                        <a href="/tables" class="list-group-item">테이블목록</a>
-                        <a href="/select" class="list-group-item">데이터조회</a>
-                        <a href="/structure" class="list-group-item">DB구조</a>
-                    </div>
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-sm-2">
+                <h1 class="my-4">DBAdmin</h1>
+                <div class="list-group">
+                    <a href="/tables" class="list-group-item">테이블목록</a>
+                    <a href="/select" class="list-group-item">데이터조회</a>
+                    <a href="/structure" class="list-group-item">DB구조</a>
                 </div>
-                <div class="col-sm-10">
-                    <h1>데이터 삽입</h1>
-                    {{content}}
-                   
-                </div>        
-            </div>  
+            </div>
+            <div class="col-sm-10">
+                <h1>테이블 생성</h1>
+                <form name="table" action="/tables/new" method="post">
+                  <div class="form-group">
+                      <label for="tablename">테이블명</label>
+                      <input type="text" name="tablename" class="form-control" id="tablename" placeholder="테이블명을 입력해 주세요">
+                  </div>
+
+                  <button type="button" class="btn btn-outline-primary" id="create">생성</button>
+                </form>
+
+                
+            </div>        
         </div>
+              
+        
+    </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+    const createBtn = document.getElementById("create");
+    createBtn.addEventListener("click",function(){
+        alert("새로운 테이블을 생성합니다.");
+        // document.location.href = "/tables/new";
+        document.forms.table.submit();
+    });
+</script>
+
 </body>
 </html>
