@@ -1,0 +1,14 @@
+<form name="board" action="/board2/edit" method="POST">
+    <input type="hidden" name="mode" value="editup">
+    <input type="hidden" name="csrf" value="<?= $csrf ?>">
+    <input type="hidden" name="data[id]" value="<?= $data->id ?>">
+    <?= var_dump($vars); ?>
+    <div class="form-group">
+        <label for="title">타이틀</label>
+        <input type="text" name="data[title]" value="<?= $data->title ?>" class="form-control" id="title" placeholder="제목 타이틀">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>

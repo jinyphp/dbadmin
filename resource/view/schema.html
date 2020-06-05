@@ -1,0 +1,12 @@
+<h1>스키마 목록</h1>
+{{content}}
+
+<button type="button" class="btn btn-outline-primary" id="addNew">스키마 추가</button>
+
+<script>
+    const addBtn = document.getElementById("addNew");
+    addBtn.addEventListener("click",function(){
+        alert("새로운 데이터베이스를 추가합니다.");
+        document.location.href = "/schema/new";
+    });
+</script>

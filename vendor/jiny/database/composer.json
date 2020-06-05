@@ -1,0 +1,32 @@
+{
+    "name": "jiny/database",
+    "description": "jinyPHP database",
+    "keywords": [
+        "jinyPHP",
+        "framwork"
+    ],
+    "homepage": "http://www.jinyphp.com",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hojinlee",
+            "email": "infohojin@gmail.com",
+            "homepage": "http://www.jinyphp.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">= 7.0"
+        
+    },
+    "autoload": {
+        "psr-4": {
+            "Jiny\\Database\\": "src/"
+        },
+        "files": [
+            "src/Helpers/Helper.php"
+        ]        
+   
+    }
+}

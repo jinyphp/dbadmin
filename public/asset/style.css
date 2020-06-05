@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+
+
+.wrapper {
+    margin: 10px;
+}
